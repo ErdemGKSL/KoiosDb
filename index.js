@@ -180,7 +180,7 @@ module.exports.user = {
 	}
 };
 
-module.exports.genel = {
+module.exports.global = {
 	/**
 	 * @param {String} index
 	 * @returns {*} Value
