@@ -37,13 +37,13 @@ db.user.set(discordUser,"index","value")
 ### db#user#push
 
 ```
-db.user.push(discordUser,"index","value")
+db.user.push(discordUser,"ArrayIndex","value")
 ```
 
 ### db#user#add
 
 ```
-db.user.add(discordUser,"index","value")
+db.user.add(discordUser,"NumberIndex","value")
 ```
 
 ## db#member
@@ -63,13 +63,13 @@ db.member.set(discordGuildMember,"index","value")
 ### db#member#push
 
 ```
-db.member.push(discordGuildMember,"index","value")
+db.member.push(discordGuildMember,"ArrayIndex","value")
 ```
 
 ### db#member#add
 
 ```
-db.member.add(discordGuildMember,"index","value")
+db.member.add(discordGuildMember,"NumberIndex","value")
 ```
 
 ## db#guild
@@ -89,13 +89,13 @@ db.guild.set(discordGuild,"index","value")
 ### db#guild#push
 
 ```
-db.guild.push(discordGuild,"index","value")
+db.guild.push(discordGuild,"ArrayIndex","value")
 ```
 
 ### db#guild#add
 
 ```
-db.guild.add(discordGuild,"index","value")
+db.guild.add(discordGuild,"NumberIndex","value")
 ```
 
 ## db#global
@@ -115,11 +115,11 @@ db.global.set("index","value")
 ### db#global#push
 
 ```
-db.global.push("index","value")
+db.global.push("ArrayIndex","value")
 ```
 
 ### db#global#add
 
 ```
-db.global.add("index","value")
+db.global.add("NumberIndex","value")
 ```
