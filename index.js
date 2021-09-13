@@ -84,6 +84,72 @@ module.exports.member = {
 			);
 			resolve(booo);
 		});
+	},
+	/**
+	 * @param {GuildMember} member
+	 * @param {String} index
+	 * @param {Number} value
+	 * @returns
+	 */
+	async add(member, index, value) {
+		return new Promise(async (resolve, reject) => {
+			if (notReady) {
+				await setup();
+				notReady = false;
+			}
+			let gdata = {};
+			let booo = false;
+			try {
+				gdata = await oku(
+					`./db/guilds/${member.guild.id}/members/${member.user.id}.json`
+				);
+				booo = true;
+			} catch {
+				gdata = {};
+			}
+			if (typeof gdata[index] !== "number")
+				throw new Error("The Indexed Data is not a number!");
+			if (typeof value !== "number")
+				throw new Error("The Value is not a number!");
+			gdata[index] += value;
+			await yazdir(
+				`./db/guilds/${member.guild.id}/members/${member.user.id}.json`,
+				gdata
+			);
+			resolve(booo);
+		});
+	},
+	/**
+	 * @param {GuildMember} member
+	 * @param {String} index
+	 * @returns
+	 */
+	async push(member, index, value) {
+		return new Promise(async (resolve, reject) => {
+			if (notReady) {
+				await setup();
+				notReady = false;
+			}
+			let gdata = {};
+			let booo = false;
+			try {
+				gdata = await oku(
+					`./db/guilds/${member.guild.id}/members/${member.user.id}.json`
+				);
+				booo = true;
+			} catch {
+				gdata = {};
+			}
+
+			if (!Array.isArray(gdata[index])) gdata[index] = [];
+			arr = gdata[index];
+			arr.push(value);
+			await yazdir(
+				`./db/guilds/${member.guild.id}/members/${member.user.id}.json`,
+				gdata
+			);
+			resolve(booo);
+		});
 	}
 };
 module.exports.guild = {
@@ -160,6 +226,61 @@ module.exports.guild = {
 			await yazdir(`./db/guilds/${guild.id}/main.json`, gdata);
 			resolve(booo);
 		});
+	},
+	/**
+	 * @param {Guild} guild
+	 * @param {String} index
+	 * @param {Number} value
+	 * @returns
+	 */
+	async add(guild, index, value) {
+		return new Promise(async (resolve, reject) => {
+			if (notReady) {
+				await setup();
+				notReady = false;
+			}
+			let gdata = {};
+			let booo = false;
+			try {
+				gdata = await oku(`./db/guilds/${guild.id}/main.json`);
+				booo = true;
+			} catch {
+				gdata = {};
+			}
+			if (typeof gdata[index] !== "number")
+				throw new Error("The Indexed Data is not a number!");
+			if (typeof value !== "number")
+				throw new Error("The Value is not a number!");
+			gdata[index] += value;
+			await yazdir(`./db/guilds/${guild.id}/main.json`, gdata);
+			resolve(booo);
+		});
+	},
+	/**
+	 * @param {Guild} guild
+	 * @param {String} index
+	 * @returns
+	 */
+	async push(guild, index, value) {
+		return new Promise(async (resolve, reject) => {
+			if (notReady) {
+				await setup();
+				notReady = false;
+			}
+			let gdata = {};
+			let booo = false;
+			try {
+				gdata = await oku(`./db/guilds/${guild.id}/main.json`);
+				booo = true;
+			} catch {
+				gdata = {};
+			}
+			if (!Array.isArray(gdata[index])) gdata[index] = [];
+			arr = gdata[index];
+			arr.push(value);
+			await yazdir(`./db/guilds/${guild.id}/main.json`, gdata);
+			resolve(booo);
+		});
 	}
 };
 //#endregion
@@ -209,6 +330,62 @@ module.exports.user = {
 			await yazdir(`./db/users/${user.id}.json`, gdata);
 			resolve(booo);
 		});
+	},
+	/**
+	 * @param {User} user
+	 * @param {String} index
+	 * @param {Number} value
+	 * @returns {Boolean} Success
+	 */
+	async add(user, index, value) {
+		return new Promise(async (resolve, reject) => {
+			if (notReady) {
+				await setup();
+				notReady = false;
+			}
+			let gdata = {};
+			let booo = false;
+			try {
+				gdata = await oku(`./db/users/${user.id}.json`);
+				booo = true;
+			} catch {
+				gdata = {};
+			}
+			if (typeof gdata[index] !== "number")
+				throw new Error("The Indexed Data is not a number!");
+			if (typeof value !== "number")
+				throw new Error("The Value is not a number!");
+			gdata[index] += value;
+			await yazdir(`./db/users/${user.id}.json`, gdata);
+			resolve(booo);
+		});
+	},
+	/**
+	 * @param {User} user
+	 * @param {String} index
+	 * @param {*} value
+	 * @returns {Boolean} Success
+	 */
+	async push(user, index, value) {
+		return new Promise(async (resolve, reject) => {
+			if (notReady) {
+				await setup();
+				notReady = false;
+			}
+			let gdata = {};
+			let booo = false;
+			try {
+				gdata = await oku(`./db/users/${user.id}.json`);
+				booo = true;
+			} catch {
+				gdata = {};
+			}
+			if (!Array.isArray(gdata[index])) gdata[index] = [];
+			arr = gdata[index];
+			arr.push(value);
+			await yazdir(`./db/users/${user.id}.json`, gdata);
+			resolve(booo);
+		});
 	}
 };
 
@@ -253,6 +430,60 @@ module.exports.global = {
 				gdata = {};
 			}
 			gdata[index] = value;
+			await yazdir(`./db/general.json`, gdata);
+			resolve(booo);
+		});
+	},
+	/**
+	 * @param {String} index
+	 * @param {Number} value
+	 * @returns {Boolean} Success
+	 */
+	async add(index, value) {
+		return new Promise(async (resolve, reject) => {
+			if (notReady) {
+				await setup();
+				notReady = false;
+			}
+			let gdata = {};
+			let booo = false;
+			try {
+				gdata = await oku(`./db/general.json`);
+				booo = true;
+			} catch {
+				gdata = {};
+			}
+			if (typeof gdata[index] !== "number")
+				throw new Error("The Indexed Data is not a number!");
+			if (typeof value !== "number")
+				throw new Error("The Value is not a number!");
+			gdata[index] += value;
+			await yazdir(`./db/general.json`, gdata);
+			resolve(booo);
+		});
+	},
+	/**
+	 * @param {String} index
+	 * @param {*} value
+	 * @returns {Boolean} Success
+	 */
+	async push(index, value) {
+		return new Promise(async (resolve, reject) => {
+			if (notReady) {
+				await setup();
+				notReady = false;
+			}
+			let gdata = {};
+			let booo = false;
+			try {
+				gdata = await oku(`./db/general.json`);
+				booo = true;
+			} catch {
+				gdata = {};
+			}
+			if (!Array.isArray(gdata[index])) gdata[index] = [];
+			arr = gdata[index];
+			arr.push(value);
 			await yazdir(`./db/general.json`, gdata);
 			resolve(booo);
 		});

@@ -41,6 +41,18 @@ db.user.get(discordUser,"index")
 db.user.set(discordUser,"index","value")
 ```
 
+### db#user#push
+
+```
+db.user.push(discordUser,"index","value")
+```
+
+### db#user#add
+
+```
+db.user.add(discordUser,"index","value")
+```
+
 ## db#member
 
 ### db#member#get
@@ -53,6 +65,18 @@ db.member.get(discordGuildMember,"index")
 
 ```
 db.member.set(discordGuildMember,"index","value")
+```
+
+### db#member#push
+
+```
+db.member.push(discordGuildMember,"index","value")
+```
+
+### db#member#add
+
+```
+db.member.add(discordGuildMember,"index","value")
 ```
 
 ## db#guild
@@ -68,6 +92,19 @@ db.guild.get(discordGuild,"index")
 ```
 db.guild.set(discordGuild,"index","value")
 ```
+
+### db#guild#push
+
+```
+db.guild.push(discordGuild,"index","value")
+```
+
+### db#guild#add
+
+```
+db.guild.add(discordGuild,"index","value")
+```
+
 ## db#global
 
 ### db#global#get
@@ -80,4 +117,16 @@ db.global.get("index")
 
 ```
 db.global.set("index","value")
+```
+
+### db#global#push
+
+```
+db.global.push("index","value")
+```
+
+### db#global#add
+
+```
+db.global.add("index","value")
 ```
