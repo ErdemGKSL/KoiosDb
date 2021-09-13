@@ -9,7 +9,8 @@ Folder (and json) based Discord(discord.js v13/12) compatible database.
 ## Example
 
 ```
-let db = new require('@erdemgoksel/koiosdb')("myDb");
+const koiosdb = require("@erdemgoksel/koiosdb");
+let db = new koiosdb("db");
 
 async function setMoney(discordUser,newMoney) {
     await db.userSet(discordUser,"money",newmoney);
