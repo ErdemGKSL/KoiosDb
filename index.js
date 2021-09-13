@@ -107,6 +107,7 @@ module.exports.member = {
 			} catch {
 				gdata = {};
 			}
+			if (!gdata[index]) gdata[index] = 0;
 			if (typeof gdata[index] !== "number")
 				throw new Error("The Indexed Data is not a number!");
 			if (typeof value !== "number")
@@ -247,6 +248,7 @@ module.exports.guild = {
 			} catch {
 				gdata = {};
 			}
+			if (!gdata[index]) gdata[index] = 0;
 			if (typeof gdata[index] !== "number")
 				throw new Error("The Indexed Data is not a number!");
 			if (typeof value !== "number")
@@ -351,6 +353,7 @@ module.exports.user = {
 			} catch {
 				gdata = {};
 			}
+			if (!gdata[index]) gdata[index] = 0;
 			if (typeof gdata[index] !== "number")
 				throw new Error("The Indexed Data is not a number!");
 			if (typeof value !== "number")
@@ -453,6 +456,7 @@ module.exports.global = {
 			} catch {
 				gdata = {};
 			}
+			if (!gdata[index]) gdata[index] = 0;
 			if (typeof gdata[index] !== "number")
 				throw new Error("The Indexed Data is not a number!");
 			if (typeof value !== "number")
