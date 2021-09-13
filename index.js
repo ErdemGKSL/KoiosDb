@@ -499,6 +499,7 @@ module.exports.global = {
 		});
 	}
 };
+
 /**
 	 *
 	 * @param {Guild} guild
