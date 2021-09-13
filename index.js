@@ -3,20 +3,25 @@ const fs = require("fs");
 var oku = (files) => JSON.parse(fs.readFileSync(files, "utf8"));
 var yazdir = (files, data) =>
 	fs.writeFileSync(files, JSON.stringify(data, null, 4));
-const { User, Guild, GuildMember } = require("discord.js");
-
+const { User, Guild, GuildMember, Collection } = require("discord.js");
+let dblist = new Collection();
 
 //#endregion
 //#region Guild ve Member Data Kaydetme
 // member data okuma kaydetme fonksiyonları
 class Database {
 	/**
-	 * @param {String} databaseName 
+	 * @param {String} databaseName
 	 */
 	constructor(databaseName) {
 		this.db_name = databaseName && databaseName != "" ? databaseName : "db";
+		let olddb = dblist.get(this.db_name);
+		if (olddb) {
+			return olddb;
+		}
 		this.checkedGuilds = [];
 		this.notReady = true;
+		dblist.set(this.db_name, this);
 	}
 	#setup() {
 		return new Promise(async (resolve, reject) => {
@@ -572,6 +577,5 @@ class Database {
 		});
 	}
 }
-
 
 module.exports = Database;
