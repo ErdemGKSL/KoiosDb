@@ -506,7 +506,7 @@ module.exports.global = {
 	 * @returns
 	 */
 	async function guildCheck(guild) {
-		return new Promise((resolve, reject) => {
+		return new Promise(async (resolve, reject) => {
 			if (notReady) {
 				await setup();
 				notReady = false;
