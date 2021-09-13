@@ -9,7 +9,7 @@ Folder (and json) based Discord(discord.js v13/12) compatible database.
 ## Example
 
 ```
-let db = require('@erdemgoksel/koiosdb')
+let db = new require('@erdemgoksel/koiosdb')("myDb");
 
 async function setMoney(discordUser,newMoney) {
     await db.user.set(discordUser,"money",newmoney);
@@ -22,104 +22,104 @@ async function setMoney(discordUser,newMoney) {
 
 ## db#user
 
-### db#user#get
+### db#userGet
 
 ```
-db.user.get(discordUser,"index")
+db.userGet(discordUser,"index")
 ```
 
-### db#user#set
+### db#userSet
 
 ```
-db.user.set(discordUser,"index","value")
+db.userSet(discordUser,"index","value")
 ```
 
-### db#user#push
+### db#userPush
 
 ```
-db.user.push(discordUser,"ArrayIndex","value")
+db.userPush(discordUser,"ArrayIndex","value")
 ```
 
-### db#user#add
+### db#userAdd
 
 ```
-db.user.add(discordUser,"NumberIndex","value")
+db.userAdd(discordUser,"NumberIndex","value")
 ```
 
 ## db#member
 
-### db#member#get
+### db#memberGet
 
 ```
-db.member.get(discordGuildMember,"index")
+db.memberGet(discordGuildMember,"index")
 ```
 
-### db#member#set
+### db#memberSet
 
 ```
-db.member.set(discordGuildMember,"index","value")
+db.memberSet(discordGuildMember,"index","value")
 ```
 
-### db#member#push
+### db#memberPush
 
 ```
-db.member.push(discordGuildMember,"ArrayIndex","value")
+db.memberPush(discordGuildMember,"ArrayIndex","value")
 ```
 
-### db#member#add
+### db#memberAdd
 
 ```
-db.member.add(discordGuildMember,"NumberIndex","value")
+db.memberAdd(discordGuildMember,"NumberIndex","value")
 ```
 
 ## db#guild
 
-### db#guild#get
+### db#guildGet
 
 ```
-db.guild.get(discordGuild,"index")
+db.guildGet(discordGuild,"index")
 ```
 
-### db#guild#set
+### db#guildSet
 
 ```
-db.guild.set(discordGuild,"index","value")
+db.guildSet(discordGuild,"index","value")
 ```
 
-### db#guild#push
+### db#guildPush
 
 ```
-db.guild.push(discordGuild,"ArrayIndex","value")
+db.guildPush(discordGuild,"ArrayIndex","value")
 ```
 
-### db#guild#add
+### db#guildAdd
 
 ```
-db.guild.add(discordGuild,"NumberIndex","value")
+db.guildAdd(discordGuild,"NumberIndex","value")
 ```
 
 ## db#global
 
-### db#global#get
+### db#get
 
 ```
-db.global.get("index")
+db.get("index")
 ```
 
-### db#global#set
+### db#set
 
 ```
-db.global.set("index","value")
+db.set("index","value")
 ```
 
-### db#global#push
+### db#push
 
 ```
-db.global.push("ArrayIndex","value")
+db.push("ArrayIndex","value")
 ```
 
-### db#global#add
+### db#add
 
 ```
-db.global.add("NumberIndex","value")
+db.add("NumberIndex","value")
 ```
