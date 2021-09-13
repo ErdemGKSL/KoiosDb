@@ -12,8 +12,8 @@ Folder (and json) based Discord(discord.js v13/12) compatible database.
 let db = new require('@erdemgoksel/koiosdb')("myDb");
 
 async function setMoney(discordUser,newMoney) {
-    await db.user.set(discordUser,"money",newmoney);
-    let money = await db.user.set(discordUser,"money");
+    await db.userSet(discordUser,"money",newmoney);
+    let money = await db.userGet(discordUser,"money");
     console.log("money set to " + money + "!");
 }
 ```
