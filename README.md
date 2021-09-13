@@ -11,7 +11,6 @@ Folder (and json) based database Discord compatible database.
 ```
 let db = require('@erdemgoksel/koiosdb')
 
-db.setup();
 
 client.on("ready",async () => {
 	client.guilds.cache.forEach((g) => {

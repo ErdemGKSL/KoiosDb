@@ -8,20 +8,24 @@ let pathlist = ["./db", "./db/guilds", "./db/users"];
 let filelist = ["./db/general.json"];
 let guildpathlist = ["./db/guilds/{0}", "./db/guilds/{0}/members"];
 const guildfilelist = [{ path: "./db/guilds/{0}/main.json", default: {} }];
-module.exports.setup = () => {
-	pathlist.forEach((x) => {
-		if (!fs.existsSync(x)) {
-			fs.mkdirSync(x, {
-				recursive: true
-			});
-		}
+let notReady = true;
+function setup() {
+	return new Promise(async (resolve, reject) => {
+		pathlist.forEach((x) => {
+			if (!fs.existsSync(x)) {
+				fs.mkdirSync(x, {
+					recursive: true
+				});
+			}
+		});
+		filelist.forEach((x) => {
+			if (!fs.existsSync(x)) {
+				yazdir(x, {});
+			}
+		});
+		resolve(true);
 	});
-	filelist.forEach((x) => {
-		if (!fs.existsSync(x)) {
-			yazdir(x, {});
-		}
-	});
-};
+}
 //#endregion
 //#region Guild ve Member Data Kaydetme
 // member data okuma kaydetme fonksiyonları
@@ -33,6 +37,10 @@ module.exports.member = {
 	 */
 	async get(member, index) {
 		return new Promise(async (resolve, reject) => {
+			if (notReady) {
+				await setup();
+				notReady = false;
+			}
 			let value = null;
 			try {
 				let gdata = await oku(
@@ -55,6 +63,10 @@ module.exports.member = {
 	 */
 	async set(member, index, value) {
 		return new Promise(async (resolve, reject) => {
+			if (notReady) {
+				await setup();
+				notReady = false;
+			}
 			let gdata = {};
 			let booo = false;
 			try {
@@ -82,6 +94,10 @@ module.exports.guild = {
 	 */
 	async guildCheck(guild) {
 		return new Promise((resolve, reject) => {
+			if (notReady) {
+				await setup();
+				notReady = false;
+			}
 			let id = guild.id;
 			guildpathlist.forEach((x) => {
 				let path = x.replace("{0}", id);
@@ -107,6 +123,10 @@ module.exports.guild = {
 	 */
 	async get(guild, index) {
 		return new Promise(async (resolve, reject) => {
+			if (notReady) {
+				await setup();
+				notReady = false;
+			}
 			let value = null;
 			try {
 				let gdata = await oku(`./db/guilds/${guild.id}/main.json`);
@@ -124,6 +144,10 @@ module.exports.guild = {
 	 */
 	async set(guild, index, value) {
 		return new Promise(async (resolve, reject) => {
+			if (notReady) {
+				await setup();
+				notReady = false;
+			}
 			let gdata = {};
 			let booo = false;
 			try {
@@ -147,6 +171,10 @@ module.exports.user = {
 	 */
 	async get(user, index) {
 		return new Promise(async (resolve, reject) => {
+			if (notReady) {
+				await setup();
+				notReady = false;
+			}
 			let value = null;
 			try {
 				let gdata = await oku(`./db/users/${user.id}.json`);
@@ -165,6 +193,10 @@ module.exports.user = {
 	 */
 	async set(user, index, value) {
 		return new Promise(async (resolve, reject) => {
+			if (notReady) {
+				await setup();
+				notReady = false;
+			}
 			let gdata = {};
 			let booo = false;
 			try {
@@ -187,6 +219,10 @@ module.exports.global = {
 	 */
 	async get(index) {
 		return new Promise(async (resolve, reject) => {
+			if (notReady) {
+				await setup();
+				notReady = false;
+			}
 			let value = null;
 			try {
 				let gdata = await oku(`./db/general.json`);
@@ -204,6 +240,10 @@ module.exports.global = {
 	 */
 	async set(index, value) {
 		return new Promise(async (resolve, reject) => {
+			if (notReady) {
+				await setup();
+				notReady = false;
+			}
 			let gdata = {};
 			let booo = false;
 			try {
