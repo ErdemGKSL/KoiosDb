@@ -1,6 +1,6 @@
 # What is this?
 
-Folder (and json) based database Discord compatible database.
+Folder (and json) based Discord(discord.js v13/12) compatible database.
 
 # Installation
 
