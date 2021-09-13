@@ -6,11 +6,19 @@ Folder (and json) based database Discord compatible database.
 
 `npm i @erdemgoksel/koiosdb`
 
-Then:
+## Example
 
 ```
 let db = require('@erdemgoksel/koiosdb')
+
 db.setup();
+
+client.on("ready",async () => {
+	client.guilds.cache.forEach((g) => {
+		db.guild.guildCheck(g);
+	});
+});
+
 async function setMoney(discordUser,newMoney) {
     await db.user.set(discordUser,"money",newmoney);
     let money = await db.user.set(discordUser,"money");
