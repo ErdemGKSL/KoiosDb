@@ -42,9 +42,9 @@ module.exports.member = {
 				await setup();
 				notReady = false;
 			}
-			if(!checkedGuilds.includes(member.guild.id)) {
+			if (!checkedGuilds.includes(member.guild.id)) {
 				await guildCheck(member.guild);
-				checkedGuilds.push(member.guild.id)
+				checkedGuilds.push(member.guild.id);
 			}
 			let value = null;
 			try {
@@ -170,8 +170,7 @@ module.exports.member = {
 		});
 	}
 };
-	
-	
+
 module.exports.guild = {
 	/**
 	 * @param {Guild} guild
@@ -501,31 +500,31 @@ module.exports.global = {
 };
 
 /**
-	 *
-	 * @param {Guild} guild
-	 * @returns
-	 */
-	async function guildCheck(guild) {
-		return new Promise(async (resolve, reject) => {
-			if (notReady) {
-				await setup();
-				notReady = false;
+ *
+ * @param {Guild} guild
+ * @returns
+ */
+async function guildCheck(guild) {
+	return new Promise(async (resolve, reject) => {
+		if (notReady) {
+			await setup();
+			notReady = false;
+		}
+		let id = guild.id;
+		guildpathlist.forEach((x) => {
+			let path = x.replace("{0}", id);
+			if (!fs.existsSync(path)) {
+				fs.mkdirSync(path, {
+					recursive: true
+				});
 			}
-			let id = guild.id;
-			guildpathlist.forEach((x) => {
-				let path = x.replace("{0}", id);
-				if (!fs.existsSync(path)) {
-					fs.mkdirSync(path, {
-						recursive: true
-					});
-				}
-			});
-			guildfilelist.forEach((x) => {
-				let path = x.path.replace("{0}", id);
-				if (!fs.existsSync(path)) {
-					yazdir(path, x.default);
-				}
-			});
-			resolve(true);
-	})
+		});
+		guildfilelist.forEach((x) => {
+			let path = x.path.replace("{0}", id);
+			if (!fs.existsSync(path)) {
+				yazdir(path, x.default);
+			}
+		});
+		resolve(true);
+	});
 }
