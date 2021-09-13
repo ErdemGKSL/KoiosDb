@@ -4,6 +4,7 @@ var oku = (files) => JSON.parse(fs.readFileSync(files, "utf8"));
 var yazdir = (files, data) =>
 	fs.writeFileSync(files, JSON.stringify(data, null, 4));
 const { User, Guild, GuildMember } = require("discord.js");
+const checkedGuilds = [];
 let pathlist = ["./db", "./db/guilds", "./db/users"];
 let filelist = ["./db/general.json"];
 let guildpathlist = ["./db/guilds/{0}", "./db/guilds/{0}/members"];
@@ -41,6 +42,10 @@ module.exports.member = {
 				await setup();
 				notReady = false;
 			}
+			if(!checkedGuilds.includes(member.guild.id)) {
+				await guildCheck(member.guild);
+				checkedGuilds.push(member.guild.id)
+			}
 			let value = null;
 			try {
 				let gdata = await oku(
@@ -66,6 +71,10 @@ module.exports.member = {
 			if (notReady) {
 				await setup();
 				notReady = false;
+			}
+			if (!checkedGuilds.includes(member.guild.id)) {
+				await guildCheck(member.guild);
+				checkedGuilds.push(member.guild.id);
 			}
 			let gdata = {};
 			let booo = false;
@@ -96,6 +105,10 @@ module.exports.member = {
 			if (notReady) {
 				await setup();
 				notReady = false;
+			}
+			if (!checkedGuilds.includes(member.guild.id)) {
+				await guildCheck(member.guild);
+				checkedGuilds.push(member.guild.id);
 			}
 			let gdata = {};
 			let booo = false;
@@ -131,6 +144,10 @@ module.exports.member = {
 				await setup();
 				notReady = false;
 			}
+			if (!checkedGuilds.includes(member.guild.id)) {
+				await guildCheck(member.guild);
+				checkedGuilds.push(member.guild.id);
+			}
 			let gdata = {};
 			let booo = false;
 			try {
@@ -153,36 +170,9 @@ module.exports.member = {
 		});
 	}
 };
+	
+	
 module.exports.guild = {
-	/**
-	 *
-	 * @param {Guild} guild
-	 * @returns
-	 */
-	async guildCheck(guild) {
-		return new Promise((resolve, reject) => {
-			if (notReady) {
-				await setup();
-				notReady = false;
-			}
-			let id = guild.id;
-			guildpathlist.forEach((x) => {
-				let path = x.replace("{0}", id);
-				if (!fs.existsSync(path)) {
-					fs.mkdirSync(path, {
-						recursive: true
-					});
-				}
-			});
-			guildfilelist.forEach((x) => {
-				let path = x.path.replace("{0}", id);
-				if (!fs.existsSync(path)) {
-					yazdir(path, x.default);
-				}
-			});
-			resolve(true);
-		});
-	},
 	/**
 	 * @param {Guild} guild
 	 * @param {String} index
@@ -193,6 +183,10 @@ module.exports.guild = {
 			if (notReady) {
 				await setup();
 				notReady = false;
+			}
+			if (!checkedGuilds.includes(guild.id)) {
+				await guildCheck(guild);
+				checkedGuilds.push(guild.id);
 			}
 			let value = null;
 			try {
@@ -214,6 +208,10 @@ module.exports.guild = {
 			if (notReady) {
 				await setup();
 				notReady = false;
+			}
+			if (!checkedGuilds.includes(guild.id)) {
+				await guildCheck(guild);
+				checkedGuilds.push(guild.id);
 			}
 			let gdata = {};
 			let booo = false;
@@ -239,6 +237,10 @@ module.exports.guild = {
 			if (notReady) {
 				await setup();
 				notReady = false;
+			}
+			if (!checkedGuilds.includes(guild.id)) {
+				await guildCheck(guild);
+				checkedGuilds.push(guild.id);
 			}
 			let gdata = {};
 			let booo = false;
@@ -268,6 +270,10 @@ module.exports.guild = {
 			if (notReady) {
 				await setup();
 				notReady = false;
+			}
+			if (!checkedGuilds.includes(guild.id)) {
+				await guildCheck(guild);
+				checkedGuilds.push(guild.id);
 			}
 			let gdata = {};
 			let booo = false;
@@ -493,3 +499,32 @@ module.exports.global = {
 		});
 	}
 };
+/**
+	 *
+	 * @param {Guild} guild
+	 * @returns
+	 */
+	async function guildCheck(guild) {
+		return new Promise((resolve, reject) => {
+			if (notReady) {
+				await setup();
+				notReady = false;
+			}
+			let id = guild.id;
+			guildpathlist.forEach((x) => {
+				let path = x.replace("{0}", id);
+				if (!fs.existsSync(path)) {
+					fs.mkdirSync(path, {
+						recursive: true
+					});
+				}
+			});
+			guildfilelist.forEach((x) => {
+				let path = x.path.replace("{0}", id);
+				if (!fs.existsSync(path)) {
+					yazdir(path, x.default);
+				}
+			});
+			resolve(true);
+	})
+}
